@@ -58,6 +58,8 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = "Winner: " + winner;
+    } else if (allFull(current.squares)) {
+      status = "Match ended in a Draw";
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
@@ -77,6 +79,15 @@ class Game extends React.Component {
       </div>
     );
   }
+}
+
+function allFull(squares) {
+  for (let i = 0; i < 9; i++) {
+    if (squares[i] === null) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function calculateWinner(squares) {
